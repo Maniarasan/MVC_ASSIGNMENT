@@ -21,6 +21,7 @@ namespace MVC_EDU2
         [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "Special Characters are Not Allowed")]
         public string Npi { get; set; }
         [Required]
+        [RegularExpression(@"[a-zA-Z\s]*", ErrorMessage = "Name Must Contain only alphabets")]
         public string Name { get; set; }
         [Required]
         [Range(25,85, ErrorMessage = "Age Must Be Between 25 and 85")]
