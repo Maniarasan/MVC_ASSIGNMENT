@@ -28,7 +28,7 @@ namespace MVC_EDU2
         public int Age { get; set; }
         [Required]
         public int Speciality { get; set; }
-        [Required][RegularExpression(@"\d+\.\d{1,2}",ErrorMessage="Charges upto two decimal places ")]
+        [Required][RegularExpression(@"\d+\.?\d{1,2}",ErrorMessage="Charges upto two decimal places ")]
         public double ConsultationCharges { get; set; }
         [Required]
         public int Hospital { get; set; }
