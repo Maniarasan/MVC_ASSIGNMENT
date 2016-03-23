@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MVC_EDU2.Contracts;
+
 
 namespace MVC_EDU2.DAL
 {
-    public class PhysicianDb:IPhysicianDb
+    public class PhysicianDb
     {
 
         HospitalEntities hospitalentities = new HospitalEntities();

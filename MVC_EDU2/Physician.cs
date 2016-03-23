@@ -11,18 +11,29 @@ namespace MVC_EDU2
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Physician
     {
         public int id { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[a-zA-Z0-9]*$", ErrorMessage = "Special Characters are Not Allowed")]
         public string Npi { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
+        [Range(25,85, ErrorMessage = "Age Must Be Between 25 and 85")]
         public int Age { get; set; }
+        [Required]
         public int Speciality { get; set; }
+        [Required][RegularExpression(@"\d+\.\d{1,2}",ErrorMessage="Charges upto two decimal places ")]
         public double ConsultationCharges { get; set; }
+        [Required]
         public int Hospital { get; set; }
-    
+        [Required]
         public virtual Hospital Hospital1 { get; set; }
+        [Required]
         public virtual Speciality Speciality1 { get; set; }
     }
 }

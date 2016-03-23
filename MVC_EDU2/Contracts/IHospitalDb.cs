@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MVC_EDU2.Contracts
 {
-    interface IPhysicanFromDb
+    interface IHospitalDb
     {
-        Physician FindAphysician(int id);
+        IEnumerable<Hospital> GetAllHospital();
     }
 }

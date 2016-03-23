@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MVC_EDU2.DAL;
+using MVC_EDU2.Contracts;
 
 namespace MVC_EDU2.Services
 {
-    public class PhysicianDetails
+    public class PhysicianDetails:IPhysicianDb
     {
+        PhysicianDb physiciandb;
 
-        private HospitalEntities hospitalentities = new HospitalEntities();
+      public  PhysicianDetails()
+        {
+            physiciandb = new PhysicianDb();
+        }
+
         
         public IEnumerable<Physician> GetAllPhysicianDetails()
         {
-            PhysicianDb physiciandb = new PhysicianDb();
+        
             return (physiciandb.GetAllPhysicians());
         }
     }

@@ -8,6 +8,6 @@ namespace MVC_EDU2.Contracts
 {
     interface IphysicianRemoveFromDb
     {
-        void PhysicianRemove(int id);
+        void DeletePhysician(int id);
     }
 }

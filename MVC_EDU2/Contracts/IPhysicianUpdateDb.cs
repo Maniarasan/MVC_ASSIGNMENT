@@ -8,6 +8,6 @@ namespace MVC_EDU2.Contracts
 {
     interface IPhysicianUpdateDb
     {
-        void UpdatePhysicianDetails(Physician physician);
+        void UpdatePhysician(Physician physician);
     }
 }

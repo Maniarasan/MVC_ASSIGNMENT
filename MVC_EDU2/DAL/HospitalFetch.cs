@@ -5,12 +5,16 @@ using System.Web;
 
 namespace MVC_EDU2.DAL
 {
-    public class PhysicianFind
+    public class HospitalFetch
     {
         HospitalEntities db = new HospitalEntities();
-        public Physician FindPhysician(int id)
+
+      public  IEnumerable<Hospital> FetchAllHospitalNames()
         {
-            return(db.Physicians.Find(id));
+         return db.Hospitals.ToList<Hospital>();
         }
+
+
+
     }
 }

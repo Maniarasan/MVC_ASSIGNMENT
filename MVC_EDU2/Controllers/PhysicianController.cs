@@ -13,15 +13,25 @@ namespace MVC_EDU2.Controllers
 {
     public class PhysicianController : Controller
     {
-        private HospitalEntities db = new HospitalEntities();
 
+        
+        SpecialityService specialitylist;
+        HospitalService hospitalservice; 
+
+      public  PhysicianController()
+        {
+            specialitylist = new SpecialityService();
+            hospitalservice = new HospitalService();
+        }
+   
         // GET: /Physician/
         public ActionResult Index()
         {
             PhysicianDetails physiciandetails = new PhysicianDetails();
 
-            ViewBag.Speciality = db.Specialities.ToList<Speciality>();
-            ViewBag.HospitalList = db.Hospitals.ToList<Hospital>();
+            ViewBag.SpecialityList = specialitylist.GetSpecialityList();
+            ViewBag.HospitalList =hospitalservice.GetAllHospital();
+            
             return View(physiciandetails.GetAllPhysicianDetails());
         }
 
@@ -30,8 +40,8 @@ namespace MVC_EDU2.Controllers
         // GET: /Physician/Create
         public ActionResult Create()
         {
-            ViewBag.HospitalList = db.Hospitals.ToList<Hospital>();
-            ViewBag.SpecialityList = db.Specialities.ToList<Speciality>();
+            ViewBag.SpecialityList = specialitylist.GetSpecialityList();
+            ViewBag.HospitalList = hospitalservice.GetAllHospital();
                    
             return View();
         }
@@ -71,8 +81,8 @@ namespace MVC_EDU2.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SpecialityList = db.Specialities.ToList<Speciality>();
-            ViewBag.HospitalList = db.Hospitals.ToList<Hospital>();
+            ViewBag.SpecialityList = specialitylist.GetSpecialityList();
+            ViewBag.HospitalList = hospitalservice.GetAllHospital();
             return View(physician);
         }
 
@@ -93,24 +103,8 @@ namespace MVC_EDU2.Controllers
             return View(physician);
         }
 
-        // GET: /Physician/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Physician physician = db.Physicians.Find(id);
-        //    if (physician == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(physician);
-        //}
-
-        // POST: /Physician/Delete/5
+ 
         [ActionName("Delete")]
-     //   [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             PhysicianDeleteService pds = new PhysicianDeleteService();
@@ -119,13 +113,6 @@ namespace MVC_EDU2.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       
     }
 }

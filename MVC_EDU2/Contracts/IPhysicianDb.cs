@@ -7,6 +7,6 @@ namespace MVC_EDU2.Contracts
 {
     public interface IPhysicianDb
     {
-         IEnumerable<Physician> GetAllPhysicians();
+         IEnumerable<Physician> GetAllPhysicianDetails();
     }
 }

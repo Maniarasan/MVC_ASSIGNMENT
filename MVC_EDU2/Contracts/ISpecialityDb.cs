@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace MVC_EDU2.Contracts
 {
-    interface IPhysicanFromDb
+    interface ISpecialityDb
     {
-        Physician FindAphysician(int id);
+         IEnumerable<Speciality> GetSpecialityList();
+
     }
 }

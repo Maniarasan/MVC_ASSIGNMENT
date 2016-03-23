@@ -7,6 +7,6 @@ namespace MVC_EDU2.Contracts
 {
     public interface IPhysicianStore
     {
-        void AddNewPhysician(Physician physician);
+       void AddPhysician(Physician physician);
     }
 }
