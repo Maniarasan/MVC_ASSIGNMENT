@@ -31,10 +31,42 @@
           <Property Name="Speciality" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Physician__Hospi__44FF419A">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+          <End Role="Physician" Type="Self.Physician" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Physician">
+              <PropertyRef Name="Hospital" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Physician__Speci__440B1D61">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Physician" Type="Self.Physician" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Physician">
+              <PropertyRef Name="Speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HospitalModelStoreContainer">
           <EntitySet Name="Hospital" EntityType="Self.Hospital" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Physician" EntityType="Self.Physician" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Physician__Hospi__44FF419A" Association="Self.FK__Physician__Hospi__44FF419A">
+            <End Role="Hospital" EntitySet="Hospital" />
+            <End Role="Physician" EntitySet="Physician" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Physician__Speci__440B1D61" Association="Self.FK__Physician__Speci__440B1D61">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Physician" EntitySet="Physician" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -47,6 +79,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="HospitalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Physicians" Relationship="Self.FK__Physician__Hospi__44FF419A" FromRole="Hospital" ToRole="Physician" />
         </EntityType>
         <EntityType Name="Physician">
           <Key>
@@ -59,6 +92,8 @@
           <Property Name="Speciality" Type="Int32" Nullable="false" />
           <Property Name="ConsultationCharges" Type="Double" Nullable="false" />
           <Property Name="Hospital" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hospital1" Relationship="Self.FK__Physician__Hospi__44FF419A" FromRole="Physician" ToRole="Hospital" />
+          <NavigationProperty Name="Speciality1" Relationship="Self.FK__Physician__Speci__440B1D61" FromRole="Physician" ToRole="Speciality" />
         </EntityType>
         <EntityType Name="Speciality">
           <Key>
@@ -66,11 +101,44 @@
           </Key>
           <Property Name="Speciality1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Physicians" Relationship="Self.FK__Physician__Speci__440B1D61" FromRole="Speciality" ToRole="Physician" />
         </EntityType>
+        <Association Name="FK__Physician__Hospi__44FF419A">
+          <End Role="Hospital" Type="Self.Hospital" Multiplicity="1" />
+          <End Role="Physician" Type="Self.Physician" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hospital">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Physician">
+              <PropertyRef Name="Hospital" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Physician__Speci__440B1D61">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Physician" Type="Self.Physician" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Physician">
+              <PropertyRef Name="Speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HospitalEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Hospitals" EntityType="Self.Hospital" />
           <EntitySet Name="Physicians" EntityType="Self.Physician" />
           <EntitySet Name="Specialities" EntityType="Self.Speciality" />
+          <AssociationSet Name="FK__Physician__Hospi__44FF419A" Association="Self.FK__Physician__Hospi__44FF419A">
+            <End Role="Hospital" EntitySet="Hospitals" />
+            <End Role="Physician" EntitySet="Physicians" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Physician__Speci__440B1D61" Association="Self.FK__Physician__Speci__440B1D61">
+            <End Role="Speciality" EntitySet="Specialities" />
+            <End Role="Physician" EntitySet="Physicians" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>

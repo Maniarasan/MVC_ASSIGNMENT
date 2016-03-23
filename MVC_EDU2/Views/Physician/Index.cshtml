@@ -7,8 +7,26 @@
 
 @{
     ViewBag.Title = "Index";
+
+
+    List<String> slist = new List<string>();
+    List<String> hlist = new List<string>();
+
+foreach(var item in ViewBag.Speciality)
+{
+    slist.Add(item.Speciality1);
+
 }
 
+
+foreach (var item in ViewBag.HospitalList)
+{
+    hlist.Add(item.HospitalName);
+
+}
+
+
+}
 <h2>Index</h2>
 
 <p>
@@ -49,20 +67,22 @@
             @Html.DisplayFor(modelItem => item.Age)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Speciality)
+            @Html.DisplayFor(modelItem =>slist[item.Speciality-1])
         </td>
-        <td>
+        
+          <td>
             @Html.DisplayFor(modelItem => item.ConsultationCharges)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Hospital)
+            @Html.DisplayFor(modelItem => hlist[item.Hospital-1])
         </td>
+
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+           <!-- Html.ActionLink("Details", "Details", new { id=item.id }) |-->
             @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { onclick="return confirmdelete()" })
         </td>
     </tr>
-}
 
+    }
 </table>

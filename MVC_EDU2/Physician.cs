@@ -21,5 +21,8 @@ namespace MVC_EDU2
         public int Speciality { get; set; }
         public double ConsultationCharges { get; set; }
         public int Hospital { get; set; }
+    
+        public virtual Hospital Hospital1 { get; set; }
+        public virtual Speciality Speciality1 { get; set; }
     }
 }

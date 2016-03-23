@@ -19,59 +19,60 @@ namespace MVC_EDU2.Controllers
         public ActionResult Index()
         {
             PhysicianDetails physiciandetails = new PhysicianDetails();
+
+            ViewBag.Speciality = db.Specialities.ToList<Speciality>();
+            ViewBag.HospitalList = db.Hospitals.ToList<Hospital>();
             return View(physiciandetails.GetAllPhysicianDetails());
         }
 
-        // GET: /Physician/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Physician physician = db.Physicians.Find(id);
-            if (physician == null)
-            {
-                return HttpNotFound();
-            }
-            return View(physician);
-        }
+   
 
         // GET: /Physician/Create
         public ActionResult Create()
         {
+            ViewBag.HospitalList = db.Hospitals.ToList<Hospital>();
+            ViewBag.SpecialityList = db.Specialities.ToList<Speciality>();
+                   
             return View();
         }
 
         // POST: /Physician/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+   
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="id,Npi,Name,Age,Speciality,ConsultationCharges,Hospital")] Physician physician)
+        public ActionResult Create([Bind(Include = "id,Npi,Name,Age,Speciality,ConsultationCharges,Hospital")] Physician physician)
         {
+
             if (ModelState.IsValid)
             {
-                db.Physicians.Add(physician);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                NewPhysicianService newphysician = new NewPhysicianService();
+                newphysician.AddPhysician(physician);
 
-            return View(physician);
+                return RedirectToAction("Index");
+           
+            }
+            return View();
         }
 
         // GET: /Physician/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Physician physician = db.Physicians.Find(id);
+            PhysicianFindService pfs = new PhysicianFindService();
+
+            Physician physician = pfs.FindAphysician(id);
+
             if (physician == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.SpecialityList = db.Specialities.ToList<Speciality>();
+            ViewBag.HospitalList = db.Hospitals.ToList<Hospital>();
             return View(physician);
         }
 
@@ -84,8 +85,9 @@ namespace MVC_EDU2.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(physician).State = EntityState.Modified;
-                db.SaveChanges();
+                PhysicianDetailsUpdate pdu = new PhysicianDetailsUpdate();
+                pdu.UpdatePhysician(physician);
+
                 return RedirectToAction("Index");
             }
             return View(physician);
@@ -111,9 +113,9 @@ namespace MVC_EDU2.Controllers
      //   [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Physician physician = db.Physicians.Find(id);
-            db.Physicians.Remove(physician);
-            db.SaveChanges();
+            PhysicianDeleteService pds = new PhysicianDeleteService();
+            pds.DeletePhysician(id);
+
             return RedirectToAction("Index");
         }
 

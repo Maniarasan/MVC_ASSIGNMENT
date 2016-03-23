@@ -2,10 +2,26 @@
 
 @{
     ViewBag.Title = "Edit";
+
+
+
+    List<String> slist = new List<string>();
+    List<String> hlist = new List<string>();
+
+    foreach (var item in ViewBag.SpecialityList)
+    {
+        slist.Add(item.Speciality1);
+
+    }
+
+    foreach (var item in ViewBag.HospitalList)
+    {
+        hlist.Add(item.HospitalName);
+
+    }
+
 }
-
 <h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
@@ -44,7 +60,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Speciality, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Speciality)
+             
+                @Html.DropDownListFor(model => model.Speciality,new SelectList(ViewBag.SpecialityList, "id", "Speciality1",new SelectListItem{Text=slist[Model.Speciality-1],Value=Model.Speciality.ToString(),Selected=true}))
                 @Html.ValidationMessageFor(model => model.Speciality)
             </div>
         </div>
@@ -60,7 +77,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Hospital, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Hospital)
+                @Html.DropDownListFor(model => model.Hospital, new SelectList(ViewBag.HospitalList, "id", "HospitalName", new SelectListItem { Text = hlist[Model.Hospital-1], Value = Model.Speciality.ToString(), Selected = true }))
                 @Html.ValidationMessageFor(model => model.Hospital)
             </div>
         </div>

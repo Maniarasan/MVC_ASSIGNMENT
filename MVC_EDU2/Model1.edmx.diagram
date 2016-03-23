@@ -4,10 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6bffa8776d344291a4370870b6b229d9" Name="Diagram1">
-        <EntityTypeShape EntityType="HospitalModel.Hospital" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HospitalModel.Physician" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HospitalModel.Speciality" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="da1a629615f44a62a8cfee66f48b889d" Name="Diagram1">
+        <EntityTypeShape EntityType="HospitalModel.Hospital" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.Physician" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalModel.Speciality" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="HospitalModel.FK__Physician__Hospi__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalModel.FK__Physician__Speci__440B1D61" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

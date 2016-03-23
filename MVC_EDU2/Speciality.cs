@@ -14,7 +14,14 @@ namespace MVC_EDU2
     
     public partial class Speciality
     {
+        public Speciality()
+        {
+            this.Physicians = new HashSet<Physician>();
+        }
+    
         public string Speciality1 { get; set; }
         public int id { get; set; }
+    
+        public virtual ICollection<Physician> Physicians { get; set; }
     }
 }
